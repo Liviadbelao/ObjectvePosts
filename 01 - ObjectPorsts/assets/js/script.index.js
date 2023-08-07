@@ -2,10 +2,12 @@ const posts = [];
 
 
 function savePost(){
-    const title = document.getElementById("title").ariaValueMax;
-    const resume = document.getElementById("resume").ariaValueMax;
-    const publisher = document.getElementById("publisher").ariaValueMax;
-    const date = document.getElementById("date").ariaValueMax;
+    const title = document.getElementById("title").value;
+    const resume = document.getElementById("resume").value;
+    const publisher = document.getElementById("publisher").value;
+    const date = document.getElementById("date").value;
+
+   console.log(title, resume, publisher, date);
 
 
     if(title && resume && publisher && date){
@@ -20,4 +22,29 @@ function  storePost(title, resume, publisher, date){
         publisher,
         date
     };
+
+    posts.push(post);
+    showPosts();
+    console.log(post);
+}
+
+function showPosts(){
+    let showContent = "";
+
+
+    posts.forEach((post, index) => {
+        showContent += `   
+             <div class="post"> 
+             <h2>${post.title}</h2>
+             <p><strong>Resumo: </strong>${post.resume}</p>
+             <p><strong>Autor:</strong> ${post.publisher}</p>
+             <p><strong>Data:</strong> ${post.date}</p>
+
+             <button onclick="editPost(${index})">Editar</button>
+             <button onclick="removePost(${index})">Excluir</button>
+             
+              </div>
+        `;
+    })
+    document.getElementById("list").innerHTML = showContent;
 }
